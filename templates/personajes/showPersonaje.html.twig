@@ -1,0 +1,25 @@
+{% extends "personajes/personajes.html.twig" %}
+
+{% block body %}
+                <div class="row">
+                    <div class="col text-center"><h2>{{personaje.name}}</h2></div>
+                </div>
+                <div class="row ">
+                    <div class="col text-center">
+                        <img src="{{personaje.image}}" style="height: 400px; object-fit: cover;">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center"><h3>Planetas</h2></div>
+                </div>
+                <div class="row-cols-1">
+                {% for planeta in personaje.planetas %}
+                <div class="card col mb-3 text-center" style="width: 18rem;">
+                    <img class="card-img-top" src="{{planeta.image}}" alt="{{planeta.name}}" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <p class="card-text">{{planeta.name}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="row">
+{% endblock %}

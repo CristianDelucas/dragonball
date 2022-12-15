@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}¡Conectate!{% endblock %}
+
+{% block body %}
+<div  class="bg-image" 
+     style="background-image: url('https://es.dragon-ball-official.com/assets/img/shared/bg_comics_pc.jpg');
+            height: 100vh">
+            
+<div style="display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;">
+<form method="post" class="card p-4" styles="background-color:red">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            Estas conectado como {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+    
+    <div class="form-check">
+    <h1 class="h3 mb-3 font-weight-normal">Inicia sesión</h1>
+    <label for="inputUsername">Nombre de usuario</label>
+    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
+    </div>
+    <div class="form-check">
+    <label for="inputPassword">Contraseña</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+    </div>
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+
+    {#
+        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+        See https://symfony.com/doc/current/security/remember_me.html
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+    #}
+    <div class="form-check text-center pt-2">
+    <button class="btn btn-lg btn-primary" type="submit">
+        Conectar
+    </button>
+    <a href="/register" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Registrarse</a>
+    </div>
+</form>
+</div>
+</div>
+{% endblock %}
+

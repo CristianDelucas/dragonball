@@ -1,0 +1,31 @@
+{% extends 'planetas/planetas.html.twig' %}
+
+{% block body %}
+    <h2 class="text-center">Planetas de Dragon Ball  </h2>
+    {# {% for message in app.flashes('success') %}
+        <p>{{ message }}</p>
+    {% endfor %} #}
+    <div class="row row-cols-1 row-cols-md-2">
+        {% for planeta in planetas %}
+            <div class="col mb-4" align="center">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ planeta.image }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{planeta.name}}</h5>
+                        <a href="{{ path('getPlaneta', {'id': planeta.id}) }}" class="btn btn-info">Info</a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('updatePlaneta', {'id': planeta.id}) }}" class="btn btn-warning">Editar</a>
+                        <a href="{{ path('deletePlaneta', {'id': planeta.id}) }}" class="btn btn-danger">Borrar</a>
+                        {% endif %}
+                        {# {% if is_granted('ROLE_USER') %}
+                        <a href="#" class="btn btn-primary">Borrar</a>
+                        {% endif %} #}
+                        
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block title %}Listado de Pokemons{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'personajes/personajes.html.twig' %}
+
+{% block body %}
+    <h2 class="text-center"> Personajes de Dragon Ball  </h2>
+    {# {% for message in app.flashes('success') %}
+        <p>{{ message }}</p>
+    {% endfor %} #}
+    <div class="row row-cols-1 row-cols-md-2">
+        {% for personaje in personajes %}
+            <div class="col mb-4 " align="center">
+                <div class="card" style="max-width: 18rem; ">
+                    <img src="{{ personaje.image }}" style="height: 200px; object-fit: cover;" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">{{personaje.name}}</h5>
+                        <p class="card-text">Poder: {{ personaje.power }}</p>
+                        <a href="{{ path('getPersonaje', {'id': personaje.id}) }}" class="btn btn-info">Info</a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('updatePersonaje', {'id': personaje.id}) }}" class="btn btn-warning">Editar</a>
+                        <a href="{{ path('deletePersonaje', {'id': personaje.id}) }}" class="btn btn-danger">Borrar</a>
+                        {% endif %}
+                        {# {% if is_granted('ROLE_USER') %}
+                        <a href="#" class="btn btn-primary">Borrar</a>
+                        
+                        {% endif %} #}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block title %}Listado de personaje{% endblock %}
